@@ -664,6 +664,7 @@
 	import coLogo from '@/images/colmo/logo.png';
 	import mdLoading from '@/images/midea/loadingImg.png'
 	import hlLoading from '@/images/hualing/loadingImg.png'
+	import coLoading from '@/images/colmo/loadingImg.png'
 	import mdMainT from '@/images/midea/together.png'
 	import hlMainT from '@/images/hualing/together.png'
 	import coMainT from '@/images/colmo/together.png'
@@ -755,7 +756,6 @@
 		}),
 		computed: {
 			status() {
-//				return 3
 				if(this.meiju) {
 					if(this.fridgeId) {
 						//美居插件里
@@ -778,7 +778,7 @@
 				let obj = {};
 				if(this.brand == 2) {
 					obj.logo = coLogo;
-					obj.loadingImg = mdLoading; //加载动画圈
+					obj.loadingImg = coLoading; //加载动画圈
 					obj.ppText = 'colmo'; //品牌名
 					obj.mainT = coMainT; //together图
 					obj.mainImg = coMainImg; //主页原件
