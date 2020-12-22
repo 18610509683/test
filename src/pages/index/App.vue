@@ -3,7 +3,7 @@
 		<music ref="music" :play="play" @clicked="clicked"></music>
 		<div v-if="status!==3" class="status01">
 			<div class="page chakan" :style="entryBgStyle" style="top:0;">
-				<img id="cloud1" class="cloud" src="/static/cloud01.png"/>
+				<img id="cloud1" class="cloud" src="/static/cloud01.png" />
 				<img class="clogo" :src="skin.logo" />
 				<img class="botImg" :src="skin.mainImg" />
 				<img class="cloud" src="/static/cloud01.png" />
@@ -835,7 +835,7 @@
 			bgBoxStyle() {
 				let bg = undefined;
 				if(this.brand == 2) {
-					bg = this.meiju?colmoBg:mideaBg
+					bg = this.meiju ? colmoBg : mideaBg
 				} else if(this.brand == 3) {
 					bg = hualingBg
 				} else {
@@ -867,7 +867,7 @@
 				}, err => {
 					console.log(err)
 				})
-			}else{
+			} else {
 				http.searchData({
 					fridgeId: encode('145135535560333')
 				}).then(res => {
@@ -876,13 +876,13 @@
 					}
 				}, err => {
 					console.log(err)
-				})				
+				})
 			}
 			window.bridge.getUserApplianceList(res => {
 				let info = JSON.stringify(res)
-				xtip.msg(info, {
-					pos: 't'
-				})
+				//				xtip.msg(info, {
+				//					pos: 't'
+				//				})
 			})
 		},
 		mounted() {
@@ -904,7 +904,7 @@
 							left = -cld[i].offsetWidth;
 						}
 						cld[i].style.cssText = 'left:' + left + 'px;';
-					}			
+					}
 				}, 100)
 			},
 			closeCloud() {
@@ -1016,20 +1016,13 @@
 						title: '美的冰箱2020年度使用报告', // 分享标题
 						desc: '哇，我的报告太棒啦，快来看看吧！', // 分享描述
 						link: location.href, // 分享链接
-						imgUrl: '/static/firstFace.png', // 分享图标
+						imgUrl: 'https://midea-images.mideav.com/AnnualReport20/share.png', // 分享图标
 					}
 					window.bridge.showSharePanel(params, res => {
-						xtip.msg('成功', {
-							pos: 'b'
-						})
-						this.success = JSON.stringify(res)
-					}, err => {
-						//alert("分享失败"+JSON.stringify(err))
-						this.err = JSON.stringify(err)
-						xtip.msg('失败', {
-							pos: 'b'
-						})
-					})
+						//						xtip.msg('分享成功', {
+						//							pos: 'b'
+						//						})
+					}, err => {})
 				} else {
 					//复制链接
 					var clipboard = new ClipboardJS('#copyBtn2', {
@@ -1561,10 +1554,11 @@
 		left: 60%;
 		top: 30%;
 	}
-	#cloud1{
+	
+	#cloud1 {
 		width: 100px;
 		height: 50px;
 		left: 20%;
-		top: 8%;		
+		top: 8%;
 	}
 </style>
