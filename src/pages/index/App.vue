@@ -1,7 +1,7 @@
 <template>
 	<div id="apps">
 		<music ref="music" :play="play" @clicked="clicked"></music>
-		<div class="status01">
+		<div v-if="showMain" class="status01">
 			<div class="page chakan" :style="entryBgStyle" style="top:0;">
 				<img id="cloud1" class="cloud" src="../../assets/cloud01.png" />
 				<img class="clogo" :src="skin.logo" />
@@ -493,7 +493,7 @@
 		}
 	}
 	var meiju = isMeiju();
-	meiju=true;
+//	meiju=true;
 	var swiper = undefined;
 	export default {
 		name: 'App',
@@ -515,6 +515,7 @@
 			showHe: false,
 			showNotice: false,
 			noData: false,
+			showMain:true
 		}),
 		computed: {
 			nightBgStyle() {
@@ -683,7 +684,7 @@
 				swiper.slideNext();
 			},
 			initCloud() {
-				var cld = document.querySelectorAll('.cloud');
+				var cld = document.getElementsByClassName('cloud');				
 				var tWidth = document.body.clientWidth;
 				var ar = [-1, 1];
 				cloudTimer = setInterval(() => {
@@ -708,6 +709,11 @@
 				let timer = setInterval(() => {
 					var ran = Math.floor(Math.random() * 15);
 					this.rate += ran;
+					if(self.noData){
+						self.showMain=false;
+						clearInterval(timer);
+						return;
+					}
 					if(this.rate >= 98) {
 						clearInterval(timer)
 						this.rate = 100;
