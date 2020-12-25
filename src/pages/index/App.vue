@@ -236,7 +236,7 @@
 										<p class="pBegin">{{dataObj.latestDayDate}} <span class="strong">{{dataObj.latestDayTime}}</span></p>
 										<p>这是你今年最晚一次打开冰箱</p>
 										<p class="pBegin">过去的一年，</p>
-										<p>22点以后你一共开门 <span class="strong">{{dataObj.tenPmAfterNum}}</span> 次</p>
+										<p>22点以后你一共开门 <span class="strong">0</span> 次</p>
 										<p>新的一年，</p>
 										<p>我想拜托你千万要早点休息！</p>
 									</div>
@@ -581,7 +581,7 @@
 									<p class="pBegin">{{dataObj.latestDayDate}} <span class="strong">{{dataObj.latestDayTime}}</span></p>
 									<p>这是你今年最晚一次打开冰箱</p>
 									<p class="pBegin">过去的一年，</p>
-									<p>22点以后你一共开门 <span class="strong">{{dataObj.tenPmAfterNum}}</span> 次</p>
+									<p>22点以后你一共开门 <span class="strong">0</span> 次</p>
 									<p>新的一年，</p>
 									<p>我想拜托你千万要早点休息！</p>
 								</div>
