@@ -336,8 +336,9 @@
 								<img @click="noticeClick" class="notice" src="../../assets/notice.png" />
 								<div v-show="showNotice" class="noticeBox">
 									<p id="noticTitle">用户须知</p>
-									<p>1、年度报告所有内容均基于用户的冰箱日常使用数据分析处理，不作为事实依据，请理性看待。</p>
-									<p>2、年度报告为个人数据，“查看我的报告”将会跳转到报告入口。“分享链接”则表示仅分享本年度报告入口，不涉及任何个人隐私数据。</p>
+									<p>1、年度报告所有内容均基于用户的冰箱日常使用数据分析处理，不作为事实依据，请理性看待。</p>									
+									<p v-if="status==3">2、年度报告为个人数据，“分享我的报告”即表示同意别人查看你的个人数据。“分享链接”则表示仅分享本年度报告入口，不涉及任何个人隐私数据。</p>
+									<p v-else>2、年度报告为个人数据，“查看我的报告”将会跳转到报告入口。“分享链接”则表示仅分享本年度报告入口，不涉及任何个人隐私数据。</p>
 									<div id="noticeBtn" class="btn" @click="noticeClick">我知道了</div>
 								</div>
 								<div class="endPage">
@@ -351,7 +352,7 @@
 									<p style="margin-top: 20px;">2020年结束了</p>
 									<p>期待来年我们更多精彩故事...</p>
 								</div>
-								<div class="endBotBox">
+								<!--<div class="endBotBox">
 									<div class="erweimabox">
 										<img class="scan" src="../../assets/scan.png" />
 										<div>
@@ -365,9 +366,25 @@
 										<div class="centerLine" style="height: 100%;width: 1px;"></div>
 										<div id="copyBtn2" class="botbtn" @click="toSeeMe2">查看我的报告</div>
 									</div>
+								</div>-->
+								<div class="endBotBox">
+									<div class="erweimabox">
+										<img class="scan" src="../../assets/scan.png" />
+										<div>
+											<p class="commnT">扫描右侧二维码可查看</p>
+											<p class="commnT">美的冰箱年度使用报告</p>
+										</div>
+										<img class="erweima" src="../../assets/erweima.png" />
+									</div>
+									<div style="height: 40%;">
+										<div id="copyBtn" class="botbtn" @click="copyUrl">分享链接</div>
+										<div class="centerLine" style="height: 100%;width: 1px;"></div>
+										<div v-if="status==3" id="copyBtn2" class="botbtn" @click="copyUrl2">分享我的报告</div>
+										<div v-else class="botbtn" @click="toSeeMe2">查看我的报告</div>
+										
+									</div>
 								</div>
 							</div>
-							<!--<div class="swiper-slide" :style="bgBoxStyle"></div>-->
 						</div>
 					</div>
 				</div>
@@ -389,8 +406,6 @@
 				</div>
 			</div>
 		</div>
-
-		<!--</transition>-->
 
 	</div>
 </template>
@@ -478,6 +493,7 @@
 		}
 	}
 	var meiju = isMeiju();
+	meiju=true;
 	var swiper = undefined;
 	export default {
 		name: 'App',
@@ -516,7 +532,7 @@
 				}
 			},
 			status() {
-//				return 3
+				//				return 3
 				if(this.meiju) {
 					if(this.fridgeId) {
 						//美居插件里
@@ -656,9 +672,9 @@
 			})
 		},
 		mounted() {
-//			if(this.status == 3) {
-//				this.showReport()
-//			}
+			//			if(this.status == 3) {
+			//				this.showReport()
+			//			}
 			this.initCloud();
 		},
 		methods: {
