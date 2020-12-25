@@ -1,6 +1,7 @@
 <template>
 	<div id="music-box">
 		<audio id="myaudio" controls :src="src"></audio>
+
 		<img class="music-bg" src="@/images/music-bg3.png" />
 		<div id="music-icon">
 			<img id="music-play" @click="clicked" :class="[play?'music-play':'']" :src="play?playImg:pauseImg" />
@@ -11,13 +12,14 @@
 <script>
 	import playImg from "@/images/music-paly.png";
 	import pauseImg from "@/images/music-pause.png";
-	const src='https://report.mideav.com/media/music.fa2785d1.mp3'
+	const src = 'https://report.mideav.com/media/music.fa2785d1.mp3'
+	var allow=true;
 	export default {
 		data() {
 			return {
 				playImg,
 				pauseImg,
-				src:src
+				src: src
 			}
 		},
 		props: {
@@ -27,9 +29,22 @@
 			}
 		},
 		mounted() {
-
+			var self=this;
+			document.addEventListener('WeixinJSBridgeReady', function() {
+				self.start();
+			})
+			document.addEventListener('touchstart', function() {
+				self.start();
+			})
 		},
 		methods: {
+			start(){
+				let myaudio=document.getElementById('myaudio');
+				if(!allow) return;
+				myaudio.play();
+				this.$emit('clicked', true);
+				allow=false;
+			},
 			refresh() {
 				this.$nextTick(() => {
 					let audioPlay = document.getElementById('myaudio')
@@ -101,7 +116,8 @@
 		animation: play 2s infinite linear;
 		-webkit-animation: play 2s infinite linear;
 	}
-	#myaudio{
+	
+	#myaudio {
 		opacity: 0;
 		top: 3.6vw;
 		left: 0;
