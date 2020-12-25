@@ -1,6 +1,6 @@
 <template>
 	<div id="music-box">
-		<audio id="myaudio" controls :src="src"></audio>
+		<audio @play="played" @pause="paused" id="myaudio" controls :src="src"></audio>
 
 		<img class="music-bg" src="@/images/music-bg3.png" />
 		<div id="music-icon">
@@ -13,7 +13,7 @@
 	import playImg from "@/images/music-paly.png";
 	import pauseImg from "@/images/music-pause.png";
 	const src = 'https://report.mideav.com/media/music.fa2785d1.mp3'
-	var allow=true;
+	var allow = true;
 	export default {
 		data() {
 			return {
@@ -29,7 +29,7 @@
 			}
 		},
 		mounted() {
-			var self=this;
+			var self = this;
 			document.addEventListener('WeixinJSBridgeReady', function() {
 				self.start();
 			})
@@ -38,12 +38,17 @@
 			})
 		},
 		methods: {
-			start(){
-				let myaudio=document.getElementById('myaudio');
+			played(){
+				this.$emit('clicked', true);
+			},
+			paused(){
+				this.$emit('clicked', false);
+			},
+			start() {
+				let myaudio = document.getElementById('myaudio');
 				if(!allow) return;
 				myaudio.play();
-				this.$emit('clicked', true);
-				allow=false;
+				allow = false;
 			},
 			refresh() {
 				this.$nextTick(() => {
