@@ -3,8 +3,8 @@
 //const md5 = require('md5-node');
 
 import axios from 'axios'
-const URL = 'https://fridge-api2.mideav.com'; //临时
-//const URL ='https://fridge-api.mideav.com'; //正式
+//const URL = 'https://fridge-api2.mideav.com'; //临时
+const URL ='https://fridge-api.mideav.com'; //正式
 const service = axios.create({
 	baseURL: URL, // url = base url + request url
 	// withCredentials: true, // send cookies when cross-domain requests

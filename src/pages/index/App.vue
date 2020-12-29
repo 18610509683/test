@@ -3,11 +3,11 @@
 		<music ref="music" :play="play" @clicked="clicked"></music>
 		<div v-if="showMain" class="status01">
 			<div class="page chakan" :style="entryBgStyle" style="top:0;">
-				<img id="cloud1" class="cloud" src="../../assets/cloud01.png" />
+				<img v-if="brand!=1" id="cloud1" class="cloud" src="../../assets/cloud01.png" />
 				<img class="clogo" :src="skin.logo" />
 				<img class="botImg" :src="skin.mainImg" />
-				<img class="cloud" src="../../assets/cloud01.png" />
-				<img id="cloud3" class="cloud" src="../../assets/cloud3.png" />
+				<img v-if="brand!=1" class="cloud" src="../../assets/cloud01.png" />
+				<img v-if="brand!=1" id="cloud3" class="cloud" src="../../assets/cloud3.png" />
 				<div class="imgText">
 					<div class="title" :style="titleStyle">{{skin.ppText}}智能冰箱2020年度使用报告</div>
 					<img class="together" :src="skin.mainT" />
@@ -35,7 +35,7 @@
 					<div class="loginText">
 						<p>请扫描上方二维码下载美的美居APP</p>
 						<p>或直接打开已安装的美的美居APP</p>
-						<p>获取你的冰箱专属年度报告</p>
+						<p>进入冰箱插件内获取年度报告</p>
 					</div>
 				</div>
 				<div class="botBtnBox">
@@ -76,7 +76,7 @@
 									<p class="pBegin">我们第一次相遇</p>
 									<p>时光定格在了那个{{dataObj.season||'冬'}}天</p>
 									<p>而我的世界从此有了你</p>
-									<p class="pBegin">转眼间我们一起走过了 <span class="strong">{{dataObj.totalDay||498}}</span> 天</p>
+									<p class="pBegin">转眼间我们一起走过了 <span class="strong">{{dataObj.totalDay}}</span> 天</p>
 									<p>以后的漫长岁月</p>
 									<p>期待我们更多的小确幸</p>
 								</div>
@@ -119,9 +119,9 @@
 
 								<div class="thisYearBox">
 									<img src="../../assets/inthisyear.png" />
-									<p class="pBegin">你打开冰箱门 <span class="strong">{{dataObj.yearOpenNum||1085}}</span> 次</p>
+									<p class="pBegin">你打开冰箱门 <span class="strong">{{dataObj.yearOpenNum}}</span> 次</p>
 									<p>超越全国 <span class="strong">{{dataObj.doorOpenTimeoutPercent}}%</span> 的用户</p>
-									<p class="pBegin">累计开门时长 <span class="strong">{{dataObj.yearOpenDuration||498}}</span> 小时</p>
+									<p class="pBegin">累计开门时长 <span class="strong">{{dataObj.yearOpenDuration}}</span> 小时</p>
 									<p>超越全国 <span class="strong">{{dataObj.yearOpenDurationPercent}}%</span> 的用户</p>
 									<p class="pBegin" v-html="dataObj.yearOpenNumMsg"></p>
 								</div>
@@ -134,13 +134,19 @@
 
 								<div class="thisYearBox">
 									<img src="../../assets/inthisyear.png" />
-									<p class="pBegin">冰箱节能指数 <span class="strong">{{dataObj.energyScore||88}}</span> 分</p>
+									<p class="pBegin">冰箱节能指数 <span class="strong">{{dataObj.energyScore}}</span> 分</p>
 									<p>超越全国 <span class="strong">{{dataObj.energyScorePercent}}%</span> 的用户</p>
-									<p class="pBegin">开门超时报警发生了 <span class="strong">{{dataObj.doorOpenTimeout||38}}</span> 次</p>
-									<p>落后于全国 <span class="strong">{{dataObj.doorOpenTimeoutPercent}}%</span> 的用户</p>
-									<p class="pBegin">乖~</p>
-									<p>用完冰箱之后要记得及时关门呀</p>
-									<p>节约能源，爱护地球，我们都是地球卫士</p>
+									<p class="pBegin">开门超时报警发生了 <span class="strong">{{dataObj.doorOpenTimeout}}</span> 次</p>
+									<!--<p>落后于全国 <span class="strong">{{dataObj.doorOpenTimeoutPercent}}%</span> 的用户</p>-->
+									<div v-if="dataObj.doorOpenTimeout>=20">
+										<p class="pBegin">乖~</p>
+										<p>用完冰箱之后要记得及时关门呀</p>
+										<p>节约能源，爱护地球，我们都是地球卫士！</p>
+									</div>
+									<div v-else>
+										<p class="pBegin">随手关门一小步，节约能源一大步</p>
+										<p>地球卫士就是你！</p>
+									</div>
 								</div>
 							</div>
 							<!--特别的日子-->
@@ -152,7 +158,7 @@
 
 									<div class="thisYearBox">
 										<img src="../../assets/specailDay.png" />
-										<p class="pBegin">2020年的 <span class="strong">{{dataObj.specialDay||''}}</span></p>
+										<p class="pBegin">2020年的 <span class="strong">{{dataObj.specialDay}}</span></p>
 										<p>你打开过 <span class="strong">{{dataObj.specialDayNum}}</span> 次冰箱</p>
 										<p>比平时多了许多</p>
 										<p>还记得那一天的故事吗？</p>
@@ -167,7 +173,7 @@
 
 									<div class="thisYearBox">
 										<img src="../../assets/specailDay.png" />
-										<p class="pBegin"><span class="strong">{{dataObj.specialDay||''}}</span> 大概是很特别的一天</p>
+										<p class="pBegin"><span class="strong">{{dataObj.specialDay}}</span> 大概是很特别的一天</p>
 										<p>你打开过 <span class="strong">{{dataObj.maxOpenNum}}</span> 次冰箱</p>
 										<p>是开门 <span class="strong">最多</span> 的一天</p>
 										<p>还记得那一天的故事吗？</p>
@@ -188,7 +194,7 @@
 
 									<div class="thisYearBox">
 										<img src="../../assets/morning.png" />
-										<p class="pBegin">{{dataObj.earliestDayDate}} <span class="strong">{{dataObj.earliestDayTime||''}}</span></p>
+										<p class="pBegin">{{dataObj.earliestDayDate}} <span class="strong">{{dataObj.earliestDayTime}}</span></p>
 										<p>这是你今年 <span class="strong">最早</span> 打开冰箱的时刻</p>
 										<p>太阳才渐渐升起</p>
 										<p>有人却已默默的忙碌起家人的早餐</p>
@@ -206,7 +212,7 @@
 
 									<div class="thisYearBox">
 										<img src="../../assets/morning.png" />
-										<p class="pBegin">{{dataObj.earliestDayDate}} <span class="strong">{{dataObj.earliestDayTime||''}}</span></p>
+										<p class="pBegin">{{dataObj.earliestDayDate}} <span class="strong">{{dataObj.earliestDayTime}}</span></p>
 										<p>这是你今年最早打开冰箱的时刻</p>
 										<p>冰箱里是不是总有美味等着你呢？</p>
 										<p class="pBegin">这一年9点之前冰箱共开门 <span class="strong">{{dataObj.nineBeforeNum}}</span> 次</p>
@@ -336,7 +342,7 @@
 								<img @click="noticeClick" class="notice" src="../../assets/notice.png" />
 								<div v-show="showNotice" class="noticeBox">
 									<p id="noticTitle">用户须知</p>
-									<p>1、年度报告所有内容均基于用户的冰箱日常使用数据分析处理，不作为事实依据，请理性看待。</p>									
+									<p>1、年度报告所有内容均基于用户的冰箱日常使用数据分析处理，不作为事实依据，请理性看待。</p>
 									<p v-if="status==3">2、年度报告为个人数据，“分享我的报告”即表示同意别人查看你的个人数据。“分享链接”则表示仅分享本年度报告入口，不涉及任何个人隐私数据。</p>
 									<p v-else>2、年度报告为个人数据，“查看我的报告”将会跳转到报告入口。“分享链接”则表示仅分享本年度报告入口，不涉及任何个人隐私数据。</p>
 									<div id="noticeBtn" class="btn" @click="noticeClick">我知道了</div>
@@ -381,7 +387,7 @@
 										<div class="centerLine" style="height: 100%;width: 1px;"></div>
 										<div v-if="status==3" id="copyBtn2" class="botbtn" @click="copyUrl2">分享我的报告</div>
 										<div v-else class="botbtn" @click="toSeeMe2">查看我的报告</div>
-										
+
 									</div>
 								</div>
 							</div>
@@ -493,7 +499,7 @@
 		}
 	}
 	var meiju = isMeiju();
-//	meiju=true;
+	//	meiju=true;
 	var swiper = undefined;
 	export default {
 		name: 'App',
@@ -515,7 +521,7 @@
 			showHe: false,
 			showNotice: false,
 			noData: false,
-			showMain:true
+			showMain: true
 		}),
 		computed: {
 			nightBgStyle() {
@@ -533,7 +539,7 @@
 				}
 			},
 			status() {
-				//				return 3
+				//								return 3
 				if(this.meiju) {
 					if(this.fridgeId) {
 						//美居插件里
@@ -557,7 +563,8 @@
 				if(this.brand == 1) {
 					obj.logo = coLogo;
 					obj.loadingImg = coLoading; //加载动画圈
-					obj.ppText = '我的'; //品牌名
+//					obj.ppText = '我的'; //品牌名
+					obj.ppText = 'COLMO'; //品牌名
 					obj.mainT = coMainT; //together图
 					obj.mainImg = coMainImg; //主页原件
 					obj.entryBg = coentryBg; //主页背景
@@ -582,7 +589,7 @@
 				let background = undefined;
 				let color = undefined;
 				if(this.brand == 1) {
-					background = '#B8B8B8';
+					background = '#6D7278';
 					color = '#FFFFFF';
 				} else if(this.brand == 2) {
 					background = '#968EFD';
@@ -655,6 +662,7 @@
 					fridgeId: encode('145135535560333')
 				}).then(res => {
 					if(res.data && res.data.code == 0) {
+						console.log(res.data)
 						if(res.data.data.length != 0) {
 							this.dataObj = res.data.data
 						} else {
@@ -684,7 +692,7 @@
 				swiper.slideNext();
 			},
 			initCloud() {
-				var cld = document.getElementsByClassName('cloud');				
+				var cld = document.getElementsByClassName('cloud');
 				var tWidth = document.body.clientWidth;
 				var ar = [-1, 1];
 				cloudTimer = setInterval(() => {
@@ -709,8 +717,8 @@
 				let timer = setInterval(() => {
 					var ran = Math.floor(Math.random() * 15);
 					this.rate += ran;
-					if(self.noData){
-						self.showMain=false;
+					if(self.noData) {
+						self.showMain = false;
 						clearInterval(timer);
 						return;
 					}
@@ -977,7 +985,8 @@
 		line-height: 9vw;
 		border-radius: 30px;
 		text-align: center;
-		font-size: 5vw;
+		/*font-size: 5vw;*/
+		font-size: 4.5vw;
 	}
 	
 	.botBtnBox {
