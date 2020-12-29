@@ -3,13 +3,13 @@
 		<music ref="music" :play="play" @clicked="clicked"></music>
 		<div v-if="showMain" class="status01">
 			<div class="page chakan" :style="entryBgStyle" style="top:0;">
-				<img id="cloud1" class="cloud" src="../../assets/cloud01.png" />
+				<img v-if="brand!=1" id="cloud1" class="cloud" src="../../assets/cloud01.png" />
 				<img class="clogo" :src="skin.logo" />
 				<img class="botImg" :src="skin.mainImg" />
-				<img class="cloud" src="../../assets/cloud01.png" />
-				<img id="cloud3" class="cloud" src="../../assets/cloud3.png" />
+				<img v-if="brand!=1" class="cloud" src="../../assets/cloud01.png" />
+				<img v-if="brand!=1" id="cloud3" class="cloud" src="../../assets/cloud3.png" />
 				<div class="imgText">
-					<div class="title" :style="titleStyle">{{skin.ppText}}智能冰箱2020年度使用报告</div>
+					<div :class="['title',brand==1&&'colmoTitle']" :style="titleStyle">{{skin.ppText}}智能冰箱2020年度使用报告</div>
 					<img class="together" :src="skin.mainT" />
 
 				</div>
@@ -19,11 +19,11 @@
 				</div>
 				<div v-else class="botBtnBox">
 					<div v-if="fridgeId">
-						<div class="btn" @click="toSeeHe">查看ta的报告</div>
-						<div class="btn" @click="toSeeMe">查看我的报告</div>
+						<div :class="['btn',brand==1&&'colmoBtn']" @click="toSeeHe">查看ta的报告</div>
+						<div :class="['btn',brand==1&&'colmoBtn']" @click="toSeeMe">查看我的报告</div>
 					</div>
 					<div v-else>
-						<div class="btn" @click="toSeeMe">查看我的报告</div>
+						<div :class="['btn',brand==1&&'colmoBtn']" @click="toSeeMe">查看我的报告</div>
 					</div>
 				</div>
 			</div>
@@ -39,8 +39,8 @@
 					</div>
 				</div>
 				<div class="botBtnBox">
-					<div id="copyBtn0" class="btn" @click="copyUrl0">分享链接</div>
-					<div class="btn" @click="showMe=false">返回前页</div>
+					<div id="copyBtn0" :class="['btn',brand==1&&'colmoBtn']" @click="copyUrl0">分享链接</div>
+					<div :class="['btn',brand==1&&'colmoBtn']" @click="showMe=false">返回前页</div>
 				</div>
 			</div>
 
@@ -563,7 +563,7 @@
 				if(this.brand == 1) {
 					obj.logo = coLogo;
 					obj.loadingImg = coLoading; //加载动画圈
-					obj.ppText = '我的'; //品牌名
+					obj.ppText = 'COLMO'; //品牌名
 					obj.mainT = coMainT; //together图
 					obj.mainImg = coMainImg; //主页原件
 					obj.entryBg = coentryBg; //主页背景
@@ -986,7 +986,9 @@
 		text-align: center;
 		font-size: 5vw;
 	}
-	
+	.colmoTitle{
+		font-size: 4.8vw;
+	}
 	.botBtnBox {
 		position: absolute;
 		left: 13vw;
@@ -1012,7 +1014,16 @@
 	.btn:active {
 		opacity: 0.8;
 	}
-	
+	.colmoBtn{
+		opacity: 0.8;
+		color: #000!important;
+		background: #fff!important;
+		border-radius: 0!important;
+		font-weight: bold;
+	}
+	.colmoBtn:active{
+		opacity: 0.6;
+	}
 	.loadingBox {
 		position: absolute;
 		left: 0;
