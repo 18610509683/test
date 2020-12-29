@@ -3,11 +3,11 @@
 		<music ref="music" :play="play" @clicked="clicked"></music>
 		<div v-if="showMain" class="status01">
 			<div class="page chakan" :style="entryBgStyle" style="top:0;">
-				<img v-if="brand!=1" id="cloud1" class="cloud" src="../../assets/cloud01.png" />
+				<img id="cloud1" class="cloud" src="../../assets/cloud01.png" />
 				<img class="clogo" :src="skin.logo" />
 				<img class="botImg" :src="skin.mainImg" />
-				<img v-if="brand!=1" class="cloud" src="../../assets/cloud01.png" />
-				<img v-if="brand!=1" id="cloud3" class="cloud" src="../../assets/cloud3.png" />
+				<img class="cloud" src="../../assets/cloud01.png" />
+				<img id="cloud3" class="cloud" src="../../assets/cloud3.png" />
 				<div class="imgText">
 					<div class="title" :style="titleStyle">{{skin.ppText}}智能冰箱2020年度使用报告</div>
 					<img class="together" :src="skin.mainT" />
@@ -499,7 +499,7 @@
 		}
 	}
 	var meiju = isMeiju();
-	//	meiju=true;
+//		meiju=true;
 	var swiper = undefined;
 	export default {
 		name: 'App',
@@ -563,8 +563,7 @@
 				if(this.brand == 1) {
 					obj.logo = coLogo;
 					obj.loadingImg = coLoading; //加载动画圈
-//					obj.ppText = '我的'; //品牌名
-					obj.ppText = 'COLMO'; //品牌名
+					obj.ppText = '我的'; //品牌名
 					obj.mainT = coMainT; //together图
 					obj.mainImg = coMainImg; //主页原件
 					obj.entryBg = coentryBg; //主页背景
@@ -589,7 +588,7 @@
 				let background = undefined;
 				let color = undefined;
 				if(this.brand == 1) {
-					background = '#6D7278';
+					background = '#B8B8B8';
 					color = '#FFFFFF';
 				} else if(this.brand == 2) {
 					background = '#968EFD';
@@ -985,8 +984,7 @@
 		line-height: 9vw;
 		border-radius: 30px;
 		text-align: center;
-		/*font-size: 5vw;*/
-		font-size: 4.5vw;
+		font-size: 5vw;
 	}
 	
 	.botBtnBox {
