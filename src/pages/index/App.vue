@@ -680,7 +680,6 @@
 					fridgeId: params.fridgeId
 				}).then(res => {
 					if(res.data && res.data.code == 0) {
-//						res.data.data=[]
 						if(res.data.data.length != 0) {
 							this.dataObj = res.data.data
 						} else {
@@ -695,7 +694,6 @@
 					fridgeId: encode('145135535560333')
 				}).then(res => {
 					if(res.data && res.data.code == 0) {
-						console.log(res.data)
 						if(res.data.data.length != 0) {
 							this.dataObj = res.data.data
 						} else {
