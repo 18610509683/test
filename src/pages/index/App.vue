@@ -1,5 +1,5 @@
 <template>
-	<div id="apps">
+	<div id="apps" :class="[brand==1&&'colmo-box']">
 		<music ref="music" :play="play" @clicked="clicked"></music>
 		<div v-if="showMain" class="status01">
 			<div class="page chakan" :style="entryBgStyle" style="top:0;">
@@ -15,7 +15,7 @@
 				</div>
 				<!--<img class="line" src="@/images/colmo/line.png" />-->
 				<div v-if="status==3" class="botBtnBox">
-					<div class="btn" @click="toSeeHe">查看我的报告</div>
+					<div :class="['btn',brand==1&&'colmoBtn']" @click="toSeeHe">查看我的报告</div>
 				</div>
 				<div v-else class="botBtnBox">
 					<div v-if="fridgeId">
@@ -29,7 +29,8 @@
 			</div>
 			<div :class="['page',showMe?'showPage':'hidePage']" :style="entryBgStyle" style="">
 				<img class="clogo" :src="skin.logo" />
-				<img class="botImg" src="../../assets/login.png" />
+				<img v-if="brand==1" class="botImg" src="@/images/colmo/colmoBot.png" />
+				<img v-else class="botImg" src="../../assets/login.png" />
 				<div class="loginbox">
 					<img style="width: 40%;" src="../../assets/erweima.png" />
 					<div class="loginText">
@@ -50,16 +51,18 @@
 				</div>
 				<div :class="['swiper-slide',!beforeLoaded?'loadingLeave':'']" :style="bgBoxStyle">
 					<div id="loadingPage">
-						<img class="botImg" src="@/images/midea/loadImg.png" />
+						<img v-if="brand==1" class="botImg" src="@/images/colmo/colmoBot.png" />
+						<img v-else class="botImg" src="@/images/midea/loadImg.png" />
 						<img class="clogo" :src="skin.logo" />
 						<img class="botImg" v-if="brand==2" src="../../assets/coverBg.png" />
 
 						<div class="loadingBox">
 							<img :class="['loadCenter',beforeLoaded?'loading':'test']" :src="skin.loadingImg" />
-							<img class="centerImg" src="@/images/midea/loadCenter.png" />
+							<img v-if="brand==1" class="centerImg" src="@/images/colmo/loadCenter.png" />
+							<img v-else class="centerImg" src="@/images/midea/loadCenter.png" />
 							<div style="margin-top: 20px;">
-								<p class="loadingText" style="font-weight: bold;">{{rate}}%</p>
-								<p class="loadingText">{{text}}</p>
+								<p :class="['loadingText',brand==1&&'colmoBase']" style="font-weight: bold;">{{rate}}%</p>
+								<p :class="['loadingText',brand==1&&'colmoBase']">{{text}}</p>
 							</div>
 						</div>
 					</div>
@@ -67,28 +70,33 @@
 						<div class="swiper-wrapper">
 							<!--初见-->
 							<div class="swiper-slide" :style="bgBoxStyle">
-								<img class="botImg" src="@/images/midea/firstSee.png" />
+								<img v-if="brand==1" class="botImg" src="@/images/colmo/colmoBot.png" />
+								<img v-else class="botImg" src="@/images/midea/firstSee.png" />
 								<img class="clogo" :src="skin.logo" />
 								<img class="botImg" v-if="brand==2" src="../../assets/coverBg.png" />
 								<div class="firstFace">
-									<img src="../../assets/firstFace.png" />
+									<img v-if="brand==1" src="../../assets/firstFace2.png" />
+									<img v-else src="../../assets/firstFace.png" />
 									<p class="dateTitle">{{dataObj.registerDate|dateFilter}}</p>
 									<p class="pBegin">我们第一次相遇</p>
 									<p>时光定格在了那个{{dataObj.season||'冬'}}天</p>
 									<p>而我的世界从此有了你</p>
-									<p class="pBegin">转眼间我们一起走过了 <span class="strong">{{dataObj.totalDay}}</span> 天</p>
+									<p class="pBegin">转眼间我们一起走过了 <span class="strong" :class="['strong',brand==1&&'strong-col']">{{dataObj.totalDay}}</span> 天</p>
 									<p>以后的漫长岁月</p>
 									<p>期待我们更多的小确幸</p>
 								</div>
 							</div>
 							<!--不平凡的2020-->
 							<div class="swiper-slide" :style="bgBoxStyle">
-								<img class="botImg" src="@/images/midea/loadImg.png" />
+								<img v-if="brand==1" class="botImg" src="@/images/colmo/colmoBot.png" />
+								<img v-else class="botImg" src="@/images/midea/loadImg.png" />
 								<img class="clogo" :src="skin.logo" />
 								<img class="botImg" v-if="brand==2" src="../../assets/coverBg.png" />
 
 								<div class="firstFace">
-									<img src="../../assets/text2020.png" />
+									<img v-if="brand==1" src="../../assets/text20202.png" />
+									<img v-else src="../../assets/text2020.png" />
+									<!--<img src="../../assets/text2020.png" />-->
 									<p class="pBegin">2020年春节</p>
 									<p>突如其来的 <span class="strong">新冠疫情</span> 蔓延全国</p>
 									<p>"钟南山"、"口罩"、"逆行者" 等词条</p>
@@ -113,12 +121,15 @@
 							</div>
 							<!--开关门次数及时长-->
 							<div class="swiper-slide" :style="bgBoxStyle">
-								<img class="botImg" src="@/images/midea/thisYear.png" />
+								<img v-if="brand==1" class="botImg" src="@/images/colmo/colmoBot.png" />
+								<img v-else class="botImg" src="@/images/midea/thisYear.png" />
 								<img class="clogo" :src="skin.logo" />
 								<img class="botImg" v-if="brand==2" src="../../assets/coverBg.png" />
 
 								<div class="thisYearBox">
-									<img src="../../assets/inthisyear.png" />
+									<img v-if="brand==1" src="../../assets/inthisyear2.png" />
+									<img v-else src="../../assets/inthisyear.png" />
+									<!--<img src="../../assets/inthisyear.png" />-->
 									<p class="pBegin">你打开冰箱门 <span class="strong">{{dataObj.yearOpenNum}}</span> 次</p>
 									<p>超越全国 <span class="strong">{{dataObj.doorOpenTimeoutPercent}}%</span> 的用户</p>
 									<p class="pBegin">累计开门时长 <span class="strong">{{dataObj.yearOpenDuration}}</span> 小时</p>
@@ -128,12 +139,16 @@
 							</div>
 							<!--节能指数-->
 							<div class="swiper-slide" :style="bgBoxStyle">
-								<img class="botImg" src="@/images/midea/thisYear2.png" />
+								<img v-if="brand==1" class="botImg" src="@/images/colmo/colmoBot.png" />
+								<img v-else class="botImg" src="@/images/midea/thisYear2.png" />
+								<!--<img class="botImg" src="@/images/midea/thisYear2.png" />-->
 								<img class="clogo" :src="skin.logo" />
 								<img class="botImg" v-if="brand==2" src="../../assets/coverBg.png" />
 
 								<div class="thisYearBox">
-									<img src="../../assets/inthisyear.png" />
+									<img v-if="brand==1" src="../../assets/inthisyear2.png" />
+									<img v-else src="../../assets/inthisyear.png" />
+									<!--<img src="../../assets/inthisyear.png" />-->
 									<p class="pBegin">冰箱节能指数 <span class="strong">{{dataObj.energyScore}}</span> 分</p>
 									<p>超越全国 <span class="strong">{{dataObj.energyScorePercent}}%</span> 的用户</p>
 									<p class="pBegin">开门超时报警发生了 <span class="strong">{{dataObj.doorOpenTimeout}}</span> 次</p>
@@ -152,12 +167,16 @@
 							<!--特别的日子-->
 							<div class="swiper-slide" :style="bgBoxStyle">
 								<div v-if="dataObj.specialDayListType==1">
-									<img class="botImg" src="@/images/midea/openDoor.png" />
+									<img v-if="brand==1" class="botImg" src="@/images/colmo/colmoBot.png" />
+									<img v-else class="botImg" src="@/images/midea/openDoor.png" />
+									<!--<img class="botImg" src="@/images/midea/openDoor.png" />-->
 									<img class="clogo" :src="skin.logo" />
 									<img class="botImg" v-if="brand==2" src="../../assets/coverBg.png" />
 
 									<div class="thisYearBox">
-										<img src="../../assets/specailDay.png" />
+										<img v-if="brand==1" src="../../assets/specailDay2.png" />
+										<img v-else src="../../assets/specailDay.png" />
+										<!--<img src="../../assets/specailDay.png" />-->
 										<p class="pBegin">2020年的 <span class="strong">{{dataObj.specialDay}}</span></p>
 										<p>你打开过 <span class="strong">{{dataObj.specialDayNum}}</span> 次冰箱</p>
 										<p>比平时多了许多</p>
@@ -167,12 +186,16 @@
 									</div>
 								</div>
 								<div v-if="dataObj.specialDayListType==2">
-									<img class="botImg" src="@/images/midea/openDoor.png" />
+									<img v-if="brand==1" class="botImg" src="@/images/colmo/colmoBot.png" />
+									<img v-else class="botImg" src="@/images/midea/openDoor.png" />
+									<!--<img class="botImg" src="@/images/midea/openDoor.png" />-->
 									<img class="clogo" :src="skin.logo" />
 									<img class="botImg" v-if="brand==2" src="../../assets/coverBg.png" />
 
 									<div class="thisYearBox">
-										<img src="../../assets/specailDay.png" />
+										<img v-if="brand==1" src="../../assets/specailDay2.png" />
+										<img v-else src="../../assets/specailDay.png" />
+										<!--<img src="../../assets/specailDay.png" />-->
 										<p class="pBegin"><span class="strong">{{dataObj.specialDay}}</span> 大概是很特别的一天</p>
 										<p>你打开过 <span class="strong">{{dataObj.maxOpenNum}}</span> 次冰箱</p>
 										<p>是开门 <span class="strong">最多</span> 的一天</p>
@@ -188,12 +211,16 @@
 							<!--早餐分析-->
 							<div class="swiper-slide" :style="bgBoxStyle">
 								<div v-if="dataObj.earliestDayListType==1">
-									<img class="botImg" src="@/images/midea/morning.png" />
+									<img v-if="brand==1" class="botImg" src="@/images/colmo/colmoBot.png" />
+									<img v-else class="botImg" src="@/images/midea/morning.png" />
+									<!--<img class="botImg" src="@/images/midea/morning.png" />-->
 									<img class="clogo" :src="skin.logo" />
 									<img class="botImg" v-if="brand==2" src="../../assets/coverBg.png" />
 
 									<div class="thisYearBox">
-										<img src="../../assets/morning.png" />
+										<img v-if="brand==1" src="../../assets/morning2.png" />
+										<img v-else src="../../assets/morning.png" />
+										<!--<img src="../../assets/morning.png" />-->
 										<p class="pBegin">{{dataObj.earliestDayDate}} <span class="strong">{{dataObj.earliestDayTime}}</span></p>
 										<p>这是你今年 <span class="strong">最早</span> 打开冰箱的时刻</p>
 										<p>太阳才渐渐升起</p>
@@ -206,12 +233,15 @@
 									</div>
 								</div>
 								<div v-if="dataObj.earliestDayListType==2">
-									<img class="botImg" src="@/images/midea/morning.png" />
+									<img v-if="brand==1" class="botImg" src="@/images/colmo/colmoBot.png" />
+									<img v-else class="botImg" src="@/images/midea/morning.png" />
 									<img class="clogo" :src="skin.logo" />
 									<img class="botImg" v-if="brand==2" src="../../assets/coverBg.png" />
 
 									<div class="thisYearBox">
-										<img src="../../assets/morning.png" />
+										<img v-if="brand==1" src="../../assets/morning2.png" />
+										<img v-else src="../../assets/morning.png" />
+										<!--<img src="../../assets/morning.png" />-->
 										<p class="pBegin">{{dataObj.earliestDayDate}} <span class="strong">{{dataObj.earliestDayTime}}</span></p>
 										<p>这是你今年最早打开冰箱的时刻</p>
 										<p>冰箱里是不是总有美味等着你呢？</p>
@@ -223,13 +253,16 @@
 							</div>
 							<!--宵夜睡眠分析-->
 							<div class="swiper-slide" :style="nightBgStyle">
-								<img class="botImg" src="@/images/midea/night.png" />
+								<img v-if="brand==1" class="botImg" src="@/images/colmo/colmoBot.png" />
+								<img v-else class="botImg" src="@/images/midea/night.png" />
 								<img class="clogo" :src="skin.logo" />
 								<img class="botImg" v-if="brand==2" src="../../assets/coverBg.png" />
 
 								<div v-if="dataObj.latestDayListType==1">
 									<div class="thisYearBox">
-										<img src="../../assets/night.png" />
+										<img v-if="brand==1" src="../../assets/night2.png" />
+										<img v-else src="../../assets/night.png" />
+										<!--<img src="../../assets/night.png" />-->
 										<p class="pBegin">{{dataObj.latestDayDate}} <span class="strong">{{dataObj.latestDayTime}}</span></p>
 										<p>夜深了，你仍迟迟未睡</p>
 										<p>夜猫子的你打开冰箱拿走了什么呢?</p>
@@ -241,7 +274,9 @@
 								</div>
 								<div v-if="dataObj.latestDayListType==2">
 									<div class="thisYearBox">
-										<img src="../../assets/night.png" />
+										<img v-if="brand==1" src="../../assets/night2.png" />
+										<img v-else src="../../assets/night.png" />
+										<!--<img src="../../assets/night.png" />-->
 										<p class="pBegin">{{dataObj.latestDayDate}} <span class="strong">{{dataObj.latestDayTime}}</span></p>
 										<p>这是你今年最晚一次打开冰箱</p>
 										<p class="pBegin">过去的一年，</p>
@@ -254,12 +289,15 @@
 
 							<!--使用习惯-->
 							<div class="swiper-slide" :style="bgBoxStyle">
-								<img class="botImg" src="@/images/midea/habit.png" />
+								<img v-if="brand==1" class="botImg" src="@/images/colmo/colmoBot.png" />
+								<img v-else class="botImg" src="@/images/midea/habit.png" />
 								<img class="clogo" :src="skin.logo" />
 								<img class="botImg" v-if="brand==2" src="../../assets/coverBg.png" />
 
 								<div class="thisYearBox">
-									<img src="../../assets/habit.png" />
+									<img v-if="brand==1" src="../../assets/habit2.png" />
+									<img v-else src="../../assets/habit.png" />
+									<!--<img src="../../assets/habit.png" />-->
 									<p class="pBegin">回顾这一年</p>
 									<div v-if="dataObj.useListType==1">
 										<p class="pBegin">你在<span class="strong">{{dataObj.useTime}}</span>时段使用冰箱都很<span class="strong">规律</span></p>
@@ -302,12 +340,15 @@
 							</div>
 							<!--健康管家-->
 							<div class="swiper-slide" :style="bgBoxStyle">
-								<img class="botImg" src="@/images/midea/health.png" />
+								<img v-if="brand==1" class="botImg" src="@/images/colmo/colmoBot.png" />
+								<img v-else class="botImg" src="@/images/midea/health.png" />
 								<img class="clogo" :src="skin.logo" />
 								<img class="botImg" v-if="brand==2" src="../../assets/coverBg.png" />
 
 								<div class="thisYearBox">
-									<img style="height: 16vw;" src="../../assets/health.png" />
+									<img style="height: 16vw;" v-if="brand==1" src="../../assets/health2.png" />
+									<img style="height: 16vw;" v-else src="../../assets/health.png" />									
+									<!--<img style="height: 16vw;" src="../../assets/health.png" />-->
 									<p class="pBegin">过去的一年里</p>
 									<p>你使用食材管理功能 <span class="strong">{{dataObj.foodManageNum}}</span> 次</p>
 									<p v-if="dataObj.foodManageNum>=50">哈哈，你就是传说中的家庭管家小能手吧！</p>
@@ -336,10 +377,12 @@
 							</div>
 							<!--结尾-->
 							<div class="swiper-slide" :style="bgBoxStyle">
-								<img class="botImg" style="bottom: 154px;" src="@/images/midea/health.png" />
+								<img v-if="brand==1" class="botImg" style="bottom: 154px;" src="@/images/colmo/endImg.png"/>
+								<img v-else class="botImg" style="bottom: 154px;" src="@/images/midea/health.png" />
 								<img class="clogo" :src="skin.logo" />
 								<img class="botImg" v-if="brand==2" src="../../assets/coverBg.png" />
-								<img @click="noticeClick" class="notice" src="../../assets/notice.png" />
+								<img v-if="brand==1" @click="noticeClick" class="notice" src="../../assets/notice2.png" />
+								<img v-else @click="noticeClick" class="notice" src="../../assets/notice.png" />
 								<div v-show="showNotice" class="noticeBox">
 									<p id="noticTitle">用户须知</p>
 									<p>1、年度报告所有内容均基于用户的冰箱日常使用数据分析处理，不作为事实依据，请理性看待。</p>
@@ -348,31 +391,19 @@
 									<div id="noticeBtn" class="btn" @click="noticeClick">我知道了</div>
 								</div>
 								<div class="endPage">
-									<img src="../../assets/keyword.png" />
+									<img v-if="brand==1" src="../../assets/keyword2.png" />
+									<img v-else src="../../assets/keyword.png" />									
+									<!--<img src="../../assets/keyword.png" />-->
 									<div class="pBegin">
 										<div class="horFlex" v-for="itm in dataObj.msgList">
-											<img class="diamond" src="../../assets/diamond.png" />
-											<div class="keyword">{{itm}}</div>
+											<img v-if="brand==1" class="diamond" src="../../assets/diamond2.png"/>
+											<img v-else class="diamond" src="../../assets/diamond.png" />
+											<div :class="['keyword',brand==1&&'keyword-col']">{{itm}}</div>
 										</div>
 									</div>
 									<p style="margin-top: 20px;">2020年结束了</p>
 									<p>期待来年我们更多精彩故事...</p>
 								</div>
-								<!--<div class="endBotBox">
-									<div class="erweimabox">
-										<img class="scan" src="../../assets/scan.png" />
-										<div>
-											<p class="commnT">扫描右侧二维码可查看</p>
-											<p class="commnT">美的冰箱年度使用报告</p>
-										</div>
-										<img class="erweima" src="../../assets/erweima.png" />
-									</div>
-									<div style="height: 40%;">
-										<div id="copyBtn" class="botbtn" @click="copyUrl">分享链接</div>
-										<div class="centerLine" style="height: 100%;width: 1px;"></div>
-										<div id="copyBtn2" class="botbtn" @click="toSeeMe2">查看我的报告</div>
-									</div>
-								</div>-->
 								<div class="endBotBox">
 									<div class="erweimabox">
 										<img class="scan" src="../../assets/scan.png" />
@@ -399,16 +430,18 @@
 		<div v-if="noData" class="pageBox">
 			<div :style="entryBgStyle" class="pageBox">
 				<img class="clogo" :src="skin.logo" />
-				<img class="botImg" src="../../assets/login.png" />
+				<img v-if="brand==1" class="botImg" src="@/images/colmo/colmoBot.png" />
+				<img v-else class="botImg" src="../../assets/login.png" />
 				<div class="loginbox">
-					<img style="width: 46%;" src="../../assets/noData.png" />
+					<img v-if="brand==1" style="width: 46%;" src="../../assets/noData2.png" />
+					<img v-else style="width: 46%;" src="../../assets/noData.png" />
 					<div class="loginText">
 						<p>2020年度暂未统计到您的数据</p>
 						<p>期待来年与你一起的更多精彩…</p>
 					</div>
 				</div>
 				<div class="botBtnBox">
-					<div id="copyBtn0" class="btn" @click="copyUrl0">分享链接</div>
+					<div id="copyBtn0" :class="['btn',brand==1&&'colmoBtn']" @click="copyUrl0">分享链接</div>
 				</div>
 			</div>
 		</div>
@@ -441,7 +474,7 @@
 	import coMainT from '@/images/colmo/together.png'
 	import coMainImg from '@/images/colmo/mainImg.png'
 	import coentryBg from '@/images/colmo/entryBg.png'
-	import coNightBg from '@/images/colmo/nightBg.png'
+	import coNightBg from '@/images/colmo/mainBg.png'
 
 	import http from '@/api/request.js';
 	import ClipboardJS from 'clipboard';
@@ -499,7 +532,7 @@
 		}
 	}
 	var meiju = isMeiju();
-//		meiju=true;
+//			meiju=true;
 	var swiper = undefined;
 	export default {
 		name: 'App',
@@ -647,6 +680,7 @@
 					fridgeId: params.fridgeId
 				}).then(res => {
 					if(res.data && res.data.code == 0) {
+//						res.data.data=[]
 						if(res.data.data.length != 0) {
 							this.dataObj = res.data.data
 						} else {
@@ -986,9 +1020,11 @@
 		text-align: center;
 		font-size: 5vw;
 	}
-	.colmoTitle{
+	
+	.colmoTitle {
 		font-size: 4.8vw;
 	}
+	
 	.botBtnBox {
 		position: absolute;
 		left: 13vw;
@@ -1014,16 +1050,19 @@
 	.btn:active {
 		opacity: 0.8;
 	}
-	.colmoBtn{
+	
+	.colmoBtn {
 		opacity: 0.8;
 		color: #000!important;
 		background: #fff!important;
 		border-radius: 0!important;
 		font-weight: bold;
 	}
-	.colmoBtn:active{
+	
+	.colmoBtn:active {
 		opacity: 0.6;
 	}
+	
 	.loadingBox {
 		position: absolute;
 		left: 0;
@@ -1083,6 +1122,10 @@
 		color: #B35903;
 		letter-spacing: 0;
 		text-align: center;
+	}
+	
+	.colmoBase {
+		color: #000;
 	}
 	
 	#loadingPage {
@@ -1215,7 +1258,34 @@
 		letter-spacing: 0;
 		font-weight: bold;
 	}
-	
+	.colmo-box .strong{
+		color: #fff!important;
+	}
+	.colmo-box .dateTitle{
+		color: #fff!important;
+	}
+	.colmo-box .minStrong{
+		color: #fff!important;
+	}
+	.colmo-box .loginbox{
+		border-radius: 0!important;
+	}
+	.colmo-box .loginbox p,.colmo-box .commnT{
+		color: #6D7278!important;
+	}
+	.colmo-box .botbtn{
+		font-weight: bold;
+	}	
+	.colmo-box .noticeBox{
+		border-radius: 0;
+	}
+	.colmo-box .noticeBox .btn{
+		border-radius: 0;
+		background: #B35903;
+	}
+	.colmo-box img.notice{
+		
+	}
 	.firstFace .minStrong {
 		font-family: FZLTZHJW--GB1-0;
 		font-size: 15px;
@@ -1248,7 +1318,9 @@
 		line-height: 20px;
 		font-weight: bold;
 	}
-	
+	.keyword-col{
+		color:#fff
+	}
 	.endBotBox {
 		position: absolute;
 		z-index: 9999;

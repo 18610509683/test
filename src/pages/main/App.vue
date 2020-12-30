@@ -1,19 +1,20 @@
 <template>
-	<div id="apps">
+	<div id="apps" :class="[brand==1&&'colmo-box']">
 		<music ref="music" :play="play" @clicked="clicked"></music>
 		<div class="page" :style="entryBgStyle" style="">
 			<img class="clogo" :src="skin.logo" />
-			<img class="botImg" src="../../assets/login.png" />
+			<img v-if="brand==1" class="botImg" src="@/images/colmo/colmoBot.png" />
+			<img v-else class="botImg" src="../../assets/login.png" />
 			<div class="loginbox">
 				<img style="width: 40%;" src="../../assets/erweima.png" />
 				<div class="loginText">
 					<p>请扫描上方二维码下载美的美居APP</p>
 					<p>或直接打开已安装的美的美居APP</p>
-					<p>获取你的冰箱专属年度报告</p>
+					<p>进入冰箱插件内获取年度报告</p>
 				</div>
 			</div>
 			<div class="botBtnBox">
-				<div id="copyBtn0" class="btn" @click="copyUrl0">分享链接</div>
+				<div id="copyBtn0" :class="['btn',brand==1&&'colmoBtn']" @click="copyUrl0">分享链接</div>
 			</div>
 		</div>
 
@@ -65,8 +66,8 @@
 		if(params.brand || params.brand == 0) {
 
 		} else {
-//			let ran = Math.ceil(Math.random() * 3);
-			let ran=0;
+			//			let ran = Math.ceil(Math.random() * 3);
+			let ran = 0;
 			params.brand = ran;
 		}
 	})();
@@ -438,4 +439,52 @@
 	.btn:active {
 		opacity: 0.8;
 	}
+	
+	.colmoBtn {
+		opacity: 0.8;
+		color: #000!important;
+		background: #fff!important;
+		border-radius: 0!important;
+		font-weight: bold;
+	}
+	
+	.colmoBtn:active {
+		opacity: 0.6;
+	}
+	
+	.colmo-box .strong {
+		color: #fff!important;
+	}
+	
+	.colmo-box .dateTitle {
+		color: #fff!important;
+	}
+	
+	.colmo-box .minStrong {
+		color: #fff!important;
+	}
+	
+	.colmo-box .loginbox {
+		border-radius: 0!important;
+	}
+	
+	.colmo-box .loginbox p,
+	.colmo-box .commnT {
+		color: #6D7278!important;
+	}
+	
+	.colmo-box .botbtn {
+		font-weight: bold;
+	}
+	
+	.colmo-box .noticeBox {
+		border-radius: 0;
+	}
+	
+	.colmo-box .noticeBox .btn {
+		border-radius: 0;
+		background: #B35903;
+	}
+	
+	.colmo-box img.notice {}
 </style>
