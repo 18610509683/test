@@ -1,7 +1,6 @@
 <template>
 	<div id="music-box">
-		<audio @play="played" @pause="paused" id="myaudio" controls :src="src"></audio>
-
+		<audio @play="played" @pause="paused" id="myaudio" autoplay="autoplay" :src="src"></audio>
 		<img class="music-bg" src="@/images/music-bg3.png" />
 		<div id="music-icon">
 			<img id="music-play" @click="clicked" :class="[play?'music-play':'']" :src="play?playImg:pauseImg" />
@@ -12,7 +11,9 @@
 <script>
 	import playImg from "@/images/music-paly.png";
 	import pauseImg from "@/images/music-pause.png";
-	const src = 'https://report.mideav.com/media/music.fa2785d1.mp3'
+	//	const src = 'https://report.mideav.com/media/music.fa2785d1.mp3'
+	const src = 'https://midea-images.mideav.com/AnnualReport201/music.fa2785d1.mp3'
+//	const src ='https://midea-images.mideav.com/AnnualReport20/music.wav'
 	var allow = true;
 	export default {
 		data() {
@@ -38,10 +39,10 @@
 			})
 		},
 		methods: {
-			played(){
+			played() {
 				this.$emit('clicked', true);
 			},
-			paused(){
+			paused() {
 				this.$emit('clicked', false);
 			},
 			start() {

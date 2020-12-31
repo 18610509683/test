@@ -131,7 +131,7 @@
 									<img v-else src="../../assets/inthisyear.png" />
 									<!--<img src="../../assets/inthisyear.png" />-->
 									<p class="pBegin">你打开冰箱门 <span class="strong">{{dataObj.yearOpenNum}}</span> 次</p>
-									<p>超越全国 <span class="strong">{{dataObj.doorOpenTimeoutPercent}}%</span> 的用户</p>
+									<p>超越全国 <span class="strong">{{dataObj.yearOpenNumPercent}}%</span> 的用户</p>
 									<p class="pBegin">累计开门时长 <span class="strong">{{dataObj.yearOpenDuration}}</span> 小时</p>
 									<p>超越全国 <span class="strong">{{dataObj.yearOpenDurationPercent}}%</span> 的用户</p>
 									<p class="pBegin" v-html="dataObj.yearOpenNumMsg"></p>
@@ -278,11 +278,16 @@
 										<img v-else src="../../assets/night.png" />
 										<!--<img src="../../assets/night.png" />-->
 										<p class="pBegin">{{dataObj.latestDayDate}} <span class="strong">{{dataObj.latestDayTime}}</span></p>
-										<p>这是你今年最晚一次打开冰箱</p>
-										<p class="pBegin">过去的一年，</p>
+										<p>这是你今年最晚打开冰箱的时刻</p>
+										<p>我想让你知道的是，</p>
+										<p>无论何时，我一直都在。</p>
+										<p class="pBegin">早睡早起，健康生活</p>
+										<p>身体，才是扮酷的本钱</p>
+										<p>新的一年，和我一起更酷吧</p>
+										<!--<p class="pBegin">过去的一年，</p>
 										<p>22点以后你一共开门 <span class="strong">0</span> 次</p>
 										<p>新的一年，</p>
-										<p>我想拜托你千万要早点休息！</p>
+										<p>我想拜托你千万要早点休息！</p>-->
 									</div>
 								</div>
 							</div>
