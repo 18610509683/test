@@ -352,7 +352,7 @@
 
 								<div class="thisYearBox">
 									<img style="height: 16vw;" v-if="brand==1" src="../../assets/health2.png" />
-									<img style="height: 16vw;" v-else src="../../assets/health.png" />									
+									<img style="height: 16vw;" v-else src="../../assets/health.png" />
 									<!--<img style="height: 16vw;" src="../../assets/health.png" />-->
 									<p class="pBegin">过去的一年里</p>
 									<p>你使用食材管理功能 <span class="strong">{{dataObj.foodManageNum}}</span> 次</p>
@@ -382,8 +382,9 @@
 							</div>
 							<!--结尾-->
 							<div class="swiper-slide" :style="bgBoxStyle">
-								<img v-if="brand==1" class="botImg" style="bottom: 154px;" src="@/images/colmo/endImg.png"/>
-								<img v-else class="botImg" style="bottom: 154px;" src="@/images/midea/health.png" />
+								<img v-if="brand==1" class="botImg" style="bottom: 154px;" src="@/images/colmo/endImg.png" />
+								<img v-else class="botImg" style="bottom: 154px;" src="@/images/midea/endImg2.png" />
+
 								<img class="clogo" :src="skin.logo" />
 								<img class="botImg" v-if="brand==2" src="../../assets/coverBg.png" />
 								<img v-if="brand==1" @click="noticeClick" class="notice" src="../../assets/notice2.png" />
@@ -397,11 +398,11 @@
 								</div>
 								<div class="endPage">
 									<img v-if="brand==1" src="../../assets/keyword2.png" />
-									<img v-else src="../../assets/keyword.png" />									
+									<img v-else src="../../assets/keyword.png" />
 									<!--<img src="../../assets/keyword.png" />-->
 									<div class="pBegin">
 										<div class="horFlex" v-for="itm in dataObj.msgList">
-											<img v-if="brand==1" class="diamond" src="../../assets/diamond2.png"/>
+											<img v-if="brand==1" class="diamond" src="../../assets/diamond2.png" />
 											<img v-else class="diamond" src="../../assets/diamond.png" />
 											<div :class="['keyword',brand==1&&'keyword-col']">{{itm}}</div>
 										</div>
@@ -425,6 +426,8 @@
 										<div v-else class="botbtn" @click="toSeeMe2">查看我的报告</div>
 
 									</div>
+									<img v-if="meiju" :class="['meiju-entry',brand==1?'fleft':'fright']" @click="gotoMeijuReport" src="../../assets/meiju-entry.png" />
+
 								</div>
 							</div>
 						</div>
@@ -537,8 +540,8 @@
 		}
 	}
 	var meiju = isMeiju();
-//			meiju=true;
 	var swiper = undefined;
+
 	export default {
 		name: 'App',
 		data: () => ({
@@ -709,12 +712,10 @@
 					console.log(err)
 				})
 			}
-			window.bridge.getUserApplianceList(res => {
-				let info = JSON.stringify(res)
-				//				xtip.msg(info, {
-				//					pos: 't'
-				//				})
-			})
+//			window.bridge.getUserApplianceList(res => {
+//				let info = JSON.stringify(res)
+//
+//			})
 		},
 		mounted() {
 			//			if(this.status == 3) {
@@ -898,6 +899,13 @@
 				}
 			},
 			copyUrl2() {
+//				if(meiju) {
+//					window.bridge.getCurrentHomeInfo(function(res) {
+//						let re = JSON.stringify(res)
+//						console.log(res)
+//					})
+//				}
+//				return;
 				if(this.meiju) {
 					let ppT;
 					if(this.brand == 1) {
@@ -954,6 +962,10 @@
 					this.play = true;
 					this.$refs.music.refresh()
 				}
+			},
+			gotoMeijuReport() {
+//				location.href = 'https://www.smartmidea.net/activity/sit/202012/annals/index.html?from=category'
+				location.href ='https://www.smartmidea.net/activity/202012/annals/index.html'
 			}
 		}
 	}
@@ -1261,34 +1273,43 @@
 		letter-spacing: 0;
 		font-weight: bold;
 	}
-	.colmo-box .strong{
+	
+	.colmo-box .strong {
 		color: #fff!important;
 	}
-	.colmo-box .dateTitle{
+	
+	.colmo-box .dateTitle {
 		color: #fff!important;
 	}
-	.colmo-box .minStrong{
+	
+	.colmo-box .minStrong {
 		color: #fff!important;
 	}
-	.colmo-box .loginbox{
+	
+	.colmo-box .loginbox {
 		border-radius: 0!important;
 	}
-	.colmo-box .loginbox p,.colmo-box .commnT{
+	
+	.colmo-box .loginbox p,
+	.colmo-box .commnT {
 		color: #6D7278!important;
 	}
-	.colmo-box .botbtn{
+	
+	.colmo-box .botbtn {
 		font-weight: bold;
-	}	
-	.colmo-box .noticeBox{
+	}
+	
+	.colmo-box .noticeBox {
 		border-radius: 0;
 	}
-	.colmo-box .noticeBox .btn{
+	
+	.colmo-box .noticeBox .btn {
 		border-radius: 0;
 		background: #B35903;
 	}
-	.colmo-box img.notice{
-		
-	}
+	
+	.colmo-box img.notice {}
+	
 	.firstFace .minStrong {
 		font-family: FZLTZHJW--GB1-0;
 		font-size: 15px;
@@ -1321,9 +1342,11 @@
 		line-height: 20px;
 		font-weight: bold;
 	}
-	.keyword-col{
-		color:#fff
+	
+	.keyword-col {
+		color: #fff
 	}
+	
 	.endBotBox {
 		position: absolute;
 		z-index: 9999;
@@ -1513,5 +1536,19 @@
 		width: 100%;
 		height: 100%;
 		position: relative;
+	}
+	
+	.meiju-entry {
+		height: 6vw;
+		position: absolute;
+		top: -9vw;
+	}
+	
+	.fleft {
+		left: 8vw;
+	}
+	
+	.fright {
+		right: 8vw;
 	}
 </style>
