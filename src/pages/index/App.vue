@@ -965,7 +965,10 @@
 			},
 			gotoMeijuReport() {
 //				location.href = 'https://www.smartmidea.net/activity/sit/202012/annals/index.html?from=category'
-				location.href ='https://www.smartmidea.net/activity/202012/annals/index.html'
+//				location.href ='https://www.smartmidea.net/activity/202012/annals/index.html'
+
+//				location.href='https://activity.msmartlife.cn/activity/sit/202012/annals/index.html#/?from=category'
+				location.href ='https://activity.msmartlife.cn/activity/202012/annals/index.html#/?from=category'
 			}
 		}
 	}
